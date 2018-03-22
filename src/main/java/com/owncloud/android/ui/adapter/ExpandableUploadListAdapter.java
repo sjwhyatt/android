@@ -277,7 +277,7 @@ public class ExpandableUploadListAdapter extends BaseExpandableListAdapter imple
             String status = getStatusText(upload);
             switch (upload.getUploadStatus()) {
                 case UPLOAD_IN_PROGRESS:
-                    ThemeUtils.colorHorizontalProgressBar(progressBar, ThemeUtils.primaryAccentColor());
+                    ThemeUtils.colorHorizontalProgressBar(progressBar, ThemeUtils.primaryAccentColor(mParentActivity));
                     progressBar.setProgress(0);
                     progressBar.setVisibility(View.VISIBLE);
 
@@ -499,7 +499,8 @@ public class ExpandableUploadListAdapter extends BaseExpandableListAdapter imple
                             .getColor(R.color.background_color));
                 }
             } else {
-                fileIcon.setImageDrawable(MimeTypeUtil.getFileTypeIcon(upload.getMimeType(), fileName, account));
+                fileIcon.setImageDrawable(MimeTypeUtil.getFileTypeIcon(upload.getMimeType(), fileName, account,
+                        mParentActivity));
             }
         }
 
@@ -721,7 +722,7 @@ public class ExpandableUploadListAdapter extends BaseExpandableListAdapter imple
         TextView tv = convertView.findViewById(R.id.uploadListGroupName);
         tv.setText(String.format(mParentActivity.getString(R.string.uploads_view_group_header),
                 group.getGroupName(), group.getGroupItemCount()));
-        tv.setTextColor(ThemeUtils.primaryAccentColor());
+        tv.setTextColor(ThemeUtils.primaryAccentColor(mParentActivity));
         return convertView;
     }
 

@@ -290,7 +290,7 @@ public class ExtendedListFragment extends Fragment
             }
         });
 
-        int fontColor = ThemeUtils.fontColor();
+        int fontColor = ThemeUtils.fontColor(getContext());
 
         LinearLayout searchBar = searchView.findViewById(R.id.search_bar);
         TextView searchBadge = searchView.findViewById(R.id.search_badge);
@@ -520,7 +520,7 @@ public class ExtendedListFragment extends Fragment
         mEmptyListHeadline = view.findViewById(R.id.empty_list_view_headline);
         mEmptyListIcon = view.findViewById(R.id.empty_list_icon);
         mEmptyListProgress = view.findViewById(R.id.empty_list_progress);
-        mEmptyListProgress.getIndeterminateDrawable().setColorFilter(ThemeUtils.primaryColor(),
+        mEmptyListProgress.getIndeterminateDrawable().setColorFilter(ThemeUtils.primaryColor(getContext()),
                 PorterDuff.Mode.SRC_IN);
     }
 
@@ -717,13 +717,13 @@ public class ExtendedListFragment extends Fragment
      */
     private void applyFABTheming() {
         AddFloatingActionButton addButton = getFabMain().getAddButton();
-        addButton.setColorNormal(ThemeUtils.primaryColor());
-        addButton.setColorPressed(ThemeUtils.primaryDarkColor());
-        addButton.setPlusColor(ThemeUtils.fontColor());
+        addButton.setColorNormal(ThemeUtils.primaryColor(getContext()));
+        addButton.setColorPressed(ThemeUtils.primaryDarkColor(getContext()));
+        addButton.setPlusColor(ThemeUtils.fontColor(getContext()));
 
-        ThemeUtils.tintFloatingActionButton(getFabUpload(), R.drawable.ic_action_upload);
-        ThemeUtils.tintFloatingActionButton(getFabMkdir(), R.drawable.ic_action_create_dir);
-        ThemeUtils.tintFloatingActionButton(getFabUploadFromApp(), R.drawable.ic_import);
+        ThemeUtils.tintFloatingActionButton(getFabUpload(), R.drawable.ic_action_upload, getContext());
+        ThemeUtils.tintFloatingActionButton(getFabMkdir(), R.drawable.ic_action_create_dir, getContext());
+        ThemeUtils.tintFloatingActionButton(getFabUploadFromApp(), R.drawable.ic_import, getContext());
     }
 
     /**
@@ -766,7 +766,8 @@ public class ExtendedListFragment extends Fragment
                     mEmptyListMessage.setText(message);
 
                     if (tintIcon) {
-                        mEmptyListIcon.setImageDrawable(ThemeUtils.tintDrawable(icon, ThemeUtils.primaryColor()));
+                        mEmptyListIcon.setImageDrawable(ThemeUtils.tintDrawable(icon,
+                                ThemeUtils.primaryColor(getContext())));
                     } else {
                         mEmptyListIcon.setImageResource(icon);
                     }
@@ -863,9 +864,9 @@ public class ExtendedListFragment extends Fragment
     }
 
     protected void onCreateSwipeToRefresh(SwipeRefreshLayout refreshLayout) {
-        int primaryColor = ThemeUtils.primaryColor();
-        int darkColor = ThemeUtils.primaryDarkColor();
-        int accentColor = ThemeUtils.primaryAccentColor();
+        int primaryColor = ThemeUtils.primaryColor(getContext());
+        int darkColor = ThemeUtils.primaryDarkColor(getContext());
+        int accentColor = ThemeUtils.primaryAccentColor(getContext());
 
         // Colors in animations
         // TODO change this to use darker and lighter color, again.

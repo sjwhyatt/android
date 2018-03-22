@@ -19,11 +19,11 @@
 package com.owncloud.android.utils;
 
 import android.accounts.Account;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.webkit.MimeTypeMap;
 
-import com.owncloud.android.MainApp;
 import com.owncloud.android.R;
 import com.owncloud.android.datamodel.OCFile;
 
@@ -80,8 +80,8 @@ public class MimeTypeUtil {
      * @param filename Name, with extension.
      * @return Drawable of an image resource.
      */
-    public static Drawable getFileTypeIcon(String mimetype, String filename) {
-        return getFileTypeIcon(mimetype, filename, null);
+    public static Drawable getFileTypeIcon(String mimetype, String filename, Context context) {
+        return getFileTypeIcon(mimetype, filename, null, context);
     }
 
     /**
@@ -92,12 +92,12 @@ public class MimeTypeUtil {
      * @param account account which color should be used
      * @return Drawable of an image resource.
      */
-    public static Drawable getFileTypeIcon(String mimetype, String filename, Account account) {
+    public static Drawable getFileTypeIcon(String mimetype, String filename, Account account, Context context) {
         int iconId = MimeTypeUtil.getFileTypeIconId(mimetype, filename);
-        Drawable icon = MainApp.getAppContext().getResources().getDrawable(iconId);
+        Drawable icon = context.getResources().getDrawable(iconId);
 
         if(R.drawable.file_zip == iconId) {
-            ThemeUtils.tintDrawable(icon, ThemeUtils.primaryColor(account));
+            ThemeUtils.tintDrawable(icon, ThemeUtils.primaryColor(account, context));
         }
 
         return icon;
@@ -128,8 +128,9 @@ public class MimeTypeUtil {
      * @param isSharedViaLink  flag if the folder is publicly shared via link
      * @return Identifier of an image resource.
      */
-    public static Drawable getFolderTypeIcon(boolean isSharedViaUsers, boolean isSharedViaLink, boolean isEncrypted) {
-        return getFolderTypeIcon(isSharedViaUsers, isSharedViaLink, isEncrypted, null);
+    public static Drawable getFolderTypeIcon(boolean isSharedViaUsers, boolean isSharedViaLink, boolean isEncrypted,
+                                             Context context) {
+        return getFolderTypeIcon(isSharedViaUsers, isSharedViaLink, isEncrypted, null, context);
     }
 
     /**
@@ -142,7 +143,7 @@ public class MimeTypeUtil {
      * @return Identifier of an image resource.
      */
     public static Drawable getFolderTypeIcon(boolean isSharedViaUsers, boolean isSharedViaLink,
-                                             boolean isEncrypted, Account account) {
+                                             boolean isEncrypted, Account account, Context context) {
         int drawableId;
 
         if (isSharedViaLink) {
@@ -155,11 +156,11 @@ public class MimeTypeUtil {
             drawableId = R.drawable.folder;
         }
 
-        return ThemeUtils.tintDrawable(drawableId, ThemeUtils.elementColor(account));
+        return ThemeUtils.tintDrawable(drawableId, ThemeUtils.elementColor(account, context));
     }
 
-    public static Drawable getDefaultFolderIcon() {
-        return getFolderTypeIcon(false, false, false);
+    public static Drawable getDefaultFolderIcon(Context context) {
+        return getFolderTypeIcon(false, false, false, context);
     }
 
 

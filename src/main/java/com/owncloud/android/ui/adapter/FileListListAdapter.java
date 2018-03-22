@@ -323,7 +323,7 @@ public class FileListListAdapter extends BaseAdapter {
                 if (parentList.isItemChecked(position)) {
                     view.setBackgroundColor(mContext.getResources().getColor(R.color.selected_item_background));
                     checkBoxV.setImageDrawable(ThemeUtils.tintDrawable(R.drawable.ic_checkbox_marked,
-                            ThemeUtils.primaryColor()));
+                            ThemeUtils.primaryColor(mContext)));
                 } else {
                     view.setBackgroundColor(Color.WHITE);
                     checkBoxV.setImageResource(R.drawable.ic_checkbox_blank_outline);
@@ -407,16 +407,15 @@ public class FileListListAdapter extends BaseAdapter {
 
 
                 } else {
-                    fileIcon.setImageDrawable(
-                            MimeTypeUtil.getFileTypeIcon(file.getMimetype(), file.getFileName(), mAccount)
-                    );
+                    fileIcon.setImageDrawable(MimeTypeUtil.getFileTypeIcon(file.getMimetype(),
+                            file.getFileName(), mAccount, mContext));
                 }
 
 
             } else {
                 // Folder
                 fileIcon.setImageDrawable(MimeTypeUtil.getFolderTypeIcon(file.isSharedWithMe() ||
-                        file.isSharedWithSharee(), file.isSharedViaLink(), file.isEncrypted()));
+                        file.isSharedWithSharee(), file.isSharedViaLink(), file.isEncrypted(), mContext));
             }
         }
         return view;

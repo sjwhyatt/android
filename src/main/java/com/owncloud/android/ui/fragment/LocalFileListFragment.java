@@ -167,12 +167,12 @@ public class LocalFileListFragment extends ExtendedListFragment {
                 saveIndexAndTopPosition(position);
             
             } else {    /// Click on a file
-                ImageView checkBoxV = (ImageView) v.findViewById(R.id.custom_checkbox);
+                ImageView checkBoxV = v.findViewById(R.id.custom_checkbox);
                 if (checkBoxV != null) {
                     if (getListView().isItemChecked(position)) {
                         v.setBackgroundColor(getContext().getResources().getColor(R.color.selected_item_background));
                         checkBoxV.setImageDrawable(ThemeUtils.tintDrawable(R.drawable.ic_checkbox_marked,
-                                ThemeUtils.primaryColor()));
+                                ThemeUtils.primaryColor(getContext())));
 
                     } else {
                         v.setBackgroundColor(Color.WHITE);

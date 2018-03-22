@@ -125,7 +125,7 @@ public class NotificationsActivity extends FileActivity {
 
         // setup drawer
         setupDrawer(R.id.nav_notifications);
-        ThemeUtils.setColoredTitle(getSupportActionBar(), getString(R.string.drawer_item_notifications));
+        ThemeUtils.setColoredTitle(getSupportActionBar(), getString(R.string.drawer_item_notifications), this);
 
         swipeListRefreshLayout.setOnRefreshListener(() -> {
             setLoadingMessage();
@@ -216,7 +216,7 @@ public class NotificationsActivity extends FileActivity {
      */
     private void setupContent() {
         emptyContentIcon.setImageResource(R.drawable.ic_notification_light_grey);
-        emptyContentProgressBar.getIndeterminateDrawable().setColorFilter(ThemeUtils.primaryAccentColor(),
+        emptyContentProgressBar.getIndeterminateDrawable().setColorFilter(ThemeUtils.primaryAccentColor(this),
                 PorterDuff.Mode.SRC_IN);
         setLoadingMessage();
 
